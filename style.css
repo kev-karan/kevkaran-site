@@ -433,3 +433,42 @@ footer {
     font-size: 1.5rem;
     cursor: pointer;
 }
+/* --- TERMINAL INTERATIVO --- */
+.terminal-interface {
+    background-color: #001100;
+    border: 1px solid #00ff00;
+    padding: 15px;
+    margin: 20px 0;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    box-shadow: inset 0 0 10px #000;
+}
+
+.terminal-output p {
+    margin-bottom: 5px;
+    color: #ccffcc; /* Cor ligeiramente mais clara para o histórico */
+}
+
+.command-line {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.prompt {
+    color: #00ff00;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Remove o estilo padrão do input para parecer texto */
+#cmdInput {
+    background: transparent;
+    border: none;
+    color: #00ff00;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    flex: 1; /* Ocupa o resto da linha */
+    outline: none; /* Remove a borda azul ao clicar */
+    text-transform: lowercase; /* Força minúsculas visualmente */
+}

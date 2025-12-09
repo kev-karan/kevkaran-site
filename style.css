@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    color: #00ff00;
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    padding: 20px;
+    height: 100vh;
+}
+
+a {
+    color: #00ff00;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+}
+
+a:hover {
+    background-color: #00ff00;
+    color: #000;
+    font-weight: bold;
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="fill:lime"><text y="15" font-size="20">👆</text></svg>'), auto; /* Cursor customizado simples */
+}
+
+/* Layout Grid Principal */
+.container {
+    display: grid;
+    grid-template-areas: 
+        "header header"
+        "nav main"
+        "footer footer";
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.retro-box {
+    border: 2px solid #00ff00;
+    padding: 20px;
+    background-color: #050505;
+    box-shadow: 0 0 10px #00ff0055; /* Brilho neon suave */
+}
+
+header {
+    grid-area: header;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Simulação de Marquee */
+.marquee-container {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px dashed #00ff00;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+
+.marquee-text {
+    display: inline-block;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Navegação */
+nav {
+    grid-area: nav;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav li {
+    border-bottom: 1px dashed #004400;
+}
+
+.active {
+    background-color: #003300;
+    text-decoration: underline;
+}
+
+.nav-extra {
+    border-top: 2px solid #00ff00;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Conteúdo Principal */
+main {
+    grid-area: main;
+    overflow-y: auto;
+}
+
+.retro-alert {
+    border: 2px dashed red;
+    color: red;
+    text-align: center;
+    padding: 10px;
+    margin: 20px 0;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+footer {
+    grid-area: footer;
+    text-align: center;
+    font-size: 0.9rem;
+}

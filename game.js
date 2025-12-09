@@ -1,11 +1,13 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const scoreElement = document.getElementById("scoreVal");
+const livesElement = document.getElementById("livesVal"); // Elemento das vidas
 const startBtn = document.getElementById("startBtn");
 
 // Configurações do Jogo
 let gameRunning = false;
 let score = 0;
+let lives = 3; // Começa com 3 vidas
 let animationId;
 
 // Jogador
@@ -50,26 +52,33 @@ function atirar() {
 
 function criarInimigo() {
     if (!gameRunning) return;
-    const size = Math.random() * 20 + 20; // Tamanho aleatório entre 20 e 40
+    const size = Math.random() * 20 + 20;
+
+    // Aumenta a dificuldade baseado no score (velocidade aumenta levemente)
+    const dificuldade = 1 + score / 500;
+
     enemies.push({
         x: Math.random() * (canvas.width - size),
         y: -size,
         w: size,
         h: size,
-        speed: Math.random() * 2 + 1, // Velocidade aleatória
+        speed: (Math.random() * 2 + 1) * dificuldade, // Aplica dificuldade
     });
 
-    // Cria próximo inimigo em tempo aleatório
-    setTimeout(criarInimigo, Math.random() * 1000 + 500);
+    // Cria próximo inimigo (tempo diminui conforme score aumenta)
+    let tempoSpawn = Math.random() * 1000 + 500;
+    if (score > 100) tempoSpawn -= 100;
+    if (score > 300) tempoSpawn -= 100;
+
+    setTimeout(criarInimigo, Math.max(300, tempoSpawn));
 }
 
 function desenharPlayer() {
     ctx.fillStyle = "#00ff00";
-    // Desenha um triângulo simples
     ctx.beginPath();
-    ctx.moveTo(player.x, player.y - player.h / 2); // Topo
-    ctx.lineTo(player.x + player.w / 2, player.y + player.h / 2); // Direita
-    ctx.lineTo(player.x - player.w / 2, player.y + player.h / 2); // Esquerda
+    ctx.moveTo(player.x, player.y - player.h / 2);
+    ctx.lineTo(player.x + player.w / 2, player.y + player.h / 2);
+    ctx.lineTo(player.x - player.w / 2, player.y + player.h / 2);
     ctx.closePath();
     ctx.fill();
 }
@@ -79,37 +88,42 @@ function desenharBullets() {
     bullets.forEach((b, index) => {
         b.y -= b.speed;
         ctx.fillRect(b.x - b.w / 2, b.y, b.w, b.h);
-
-        // Remove se sair da tela
         if (b.y < 0) bullets.splice(index, 1);
     });
 }
 
 function desenharEnemies() {
-    ctx.strokeStyle = "#ff0000"; // Inimigos são contornos vermelhos
+    ctx.strokeStyle = "#ff0000";
     ctx.lineWidth = 2;
 
-    enemies.forEach((e, index) => {
+    // Usamos um loop reverso para poder remover itens sem bugar o loop
+    for (let i = enemies.length - 1; i >= 0; i--) {
+        let e = enemies[i];
         e.y += e.speed;
         ctx.strokeRect(e.x, e.y, e.w, e.h);
 
-        // Game Over se tocar no chão
+        // 1. Inimigo passou do fundo (Invasão)
         if (e.y > canvas.height) {
-            gameOver();
+            enemies.splice(i, 1); // Remove o inimigo
+            perderVida();
         }
-
-        // Colisão com Jogador
-        if (player.x < e.x + e.w && player.x + player.w > e.x && player.y < e.y + e.h && player.y + player.h > e.y) {
-            gameOver();
+        // 2. Inimigo tocou no player (Colisão)
+        else if (
+            player.x < e.x + e.w &&
+            player.x + player.w > e.x &&
+            player.y < e.y + e.h &&
+            player.y + player.h > e.y
+        ) {
+            enemies.splice(i, 1); // Remove o inimigo
+            perderVida();
         }
-    });
+    }
 }
 
 function checarColisoes() {
     bullets.forEach((b, bIndex) => {
         enemies.forEach((e, eIndex) => {
             if (b.x < e.x + e.w && b.x + b.w > e.x && b.y < e.y + e.h && b.y + b.h > e.y) {
-                // Colisão detectada!
                 bullets.splice(bIndex, 1);
                 enemies.splice(eIndex, 1);
                 score += 10;
@@ -119,14 +133,26 @@ function checarColisoes() {
     });
 }
 
+// Nova função para gerenciar as vidas
+function perderVida() {
+    lives--;
+    livesElement.innerText = lives;
+
+    // Efeito visual de dano (tela pisca vermelho rapidinho)
+    canvas.style.borderColor = "red";
+    setTimeout(() => (canvas.style.borderColor = "#00ff00"), 200);
+
+    if (lives <= 0) {
+        gameOver();
+    }
+}
+
 function update() {
     if (!gameRunning) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa tela
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Movimento Player
     player.x += player.dx;
-    // Impede sair da tela
     if (player.x < player.w / 2) player.x = player.w / 2;
     if (player.x > canvas.width - player.w / 2) player.x = canvas.width - player.w / 2;
 
@@ -141,13 +167,15 @@ function update() {
 function iniciarJogo() {
     if (gameRunning) return;
 
-    // Reseta variaveis
     gameRunning = true;
     score = 0;
+    lives = 3; // Reseta vidas
     bullets = [];
     enemies = [];
+
     scoreElement.innerText = score;
-    startBtn.style.display = "none"; // Esconde botão
+    livesElement.innerText = lives; // Atualiza texto
+    startBtn.style.display = "none";
     player.x = canvas.width / 2;
 
     criarInimigo();
@@ -158,17 +186,17 @@ function gameOver() {
     gameRunning = false;
     cancelAnimationFrame(animationId);
 
-    // Desenha tela de Game Over
     ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "#00ff00";
     ctx.font = "40px VT323";
     ctx.textAlign = "center";
-    ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+    ctx.fillText("SISTEMA CORROMPIDO", canvas.width / 2, canvas.height / 2);
+
     ctx.font = "20px VT323";
     ctx.fillText(`Score Final: ${score}`, canvas.width / 2, canvas.height / 2 + 40);
 
     startBtn.style.display = "inline-block";
-    startBtn.innerText = ">> TENTAR NOVAMENTE <<";
+    startBtn.innerText = ">> REINICIAR SISTEMA <<";
 }

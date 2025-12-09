@@ -472,3 +472,33 @@ footer {
     outline: none; /* Remove a borda azul ao clicar */
     text-transform: lowercase; /* Força minúsculas visualmente */
 }
+/* --- FOOTER AVANÇADO --- */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-section {
+    flex: 1; /* Divide o espaço igualmente */
+}
+
+/* O do meio fica centralizado */
+.footer-section:nth-child(2) {
+    text-align: center;
+    border-left: 1px dashed #004400;
+    border-right: 1px dashed #004400;
+}
+
+/* O da direita alinha à direita */
+.footer-section:last-child {
+    text-align: right;
+}
+
+/* Esconde o meio no celular para não quebrar */
+@media (max-width: 600px) {
+    .mobile-hide {
+        display: none;
+    }
+}

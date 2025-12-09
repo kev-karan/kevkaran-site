@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Kelwin's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="retro-box">
+            <h1>&lt;KELWIN_KARAN /&gt;</h1>
+            <div class="marquee-container">
+                <p class="marquee-text">Aguardando conexão segura... Canal de comunicação aberto... </p>
+            </div>
+        </header>
+
+        <nav class="retro-box">
+            <ul>
+                <li><a href="index.html">:: Home ::</a></li>
+                <li><a href="sobre.html">:: Sobre Mim ::</a></li>
+                <li><a href="projetos.html">:: Projetos ::</a></li>
+                <li><a href="game.html">:: Mini Game ::</a></li>
+                <li><a href="contato.html" class="active">:: Contato ::</a></li>
+            </ul>
+            <div class="nav-extra">
+                <p>Status: Transmitindo</p>
+                <p id="relogio">00:00:00</p>
+            </div>
+        </nav>
+
+        <main class="retro-box main-content">
+            <section class="contact-section">
+                <h2>// INICIAR_TRANSMISSAO</h2>
+                <p>Utilize o terminal abaixo para enviar uma mensagem direta.</p>
+                
+                <div class="contact-grid">
+                    <form class="retro-form" action="#" method="post">
+                        <div class="form-group">
+                            <label for="nome">> NOME_REMETENTE:</label>
+                            <input type="text" id="nome" name="nome" placeholder="Digite seu nome..." required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">> EMAIL_DE_RETORNO:</label>
+                            <input type="email" id="email" name="email" placeholder="usuario@dominio.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensagem">> PACOTE_DE_DADOS (MENSAGEM):</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" placeholder="Digite sua mensagem aqui..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-retro btn-submit">>> [ENVIAR_DADOS] <<</button>
+                    </form>
+
+                    <div class="direct-links">
+                        <h3>:: CANAIS_DIRETOS ::</h3>
+                        <ul class="link-list">
+                            <li>
+                                <a href="mailto:kelwinkaran@gmail.com" target="_blank">
+                                    [ @ ] E-MAIL_PRINCIPAL
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/in/kelwinkaran/" target="_blank">
+                                    [ IN ] LINKEDIN_PROFILE
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/KevKaran" target="_blank">
+                                    [&lt;/&gt;] GITHUB_REPO
+                                </a>
+                            </li>
+                        </ul>
+                        
+                        <div class="system-msg">
+                            <p>*** ATENÇÃO ***</p>
+                            <p>Respostas podem levar até 24h terrestres.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="retro-box">
+            <p>&copy; 2025 Kelwin Karan.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

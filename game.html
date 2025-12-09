@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game - Kelwin's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="retro-box">
+            <h1>&lt;KELWIN_KARAN /&gt;</h1>
+            <div class="marquee-container">
+                <p class="marquee-text">ALERTA: Invasão de bugs detectada! Iniciar protocolo de defesa... </p>
+            </div>
+        </header>
+
+        <nav class="retro-box">
+            <ul>
+                <li><a href="index.html">:: Home ::</a></li>
+                <li><a href="sobre.html">:: Sobre Mim ::</a></li>
+                <li><a href="projetos.html">:: Projetos ::</a></li>
+                <li><a href="game.html" class="active">:: Mini Game ::</a></li>
+                <li><a href="contato.html">:: Contato ::</a></li>
+            </ul>
+            <div class="nav-extra">
+                <p>Status: Combate</p>
+                <p id="relogio">00:00:00</p>
+            </div>
+        </nav>
+
+        <main class="retro-box main-content game-container">
+            <div class="game-header">
+                <h2>// DEFESA_DO_SISTEMA.EXE</h2>
+                <div class="game-info">
+                    <p>SCORE: <span id="scoreVal">0</span></p>
+                    <p>CONTROLES: [←][→] Mover | [ESPAÇO] Atirar</p>
+                </div>
+            </div>
+
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+            
+            <button id="startBtn" class="btn-retro" onclick="iniciarJogo()">>> INICIAR SISTEMA <<</button>
+        </main>
+
+        <footer class="retro-box">
+            <p>&copy; 2025 Kelwin Karan.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

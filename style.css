@@ -25,7 +25,6 @@ a:hover {
     background-color: #00ff00;
     color: #000;
     font-weight: bold;
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" style="fill:lime"><text y="15" font-size="20">👆</text></svg>'), auto; /* Cursor customizado simples */
 }
 
 /* Layout Grid Principal */
@@ -196,4 +195,241 @@ footer {
     background-color: #00ff00;
     color: black;
     box-shadow: 0 0 10px #00ff00;
+}
+
+/* --- ESTILOS DA PÁGINA SOBRE MIM --- */
+
+.about-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; /* Para ficar responsivo no celular */
+}
+
+/* Coluna da Esquerda (Avatar) */
+.profile-card {
+    flex: 1;
+    min-width: 200px;
+    border-right: 1px dashed #004400;
+    padding-right: 20px;
+    text-align: center;
+}
+
+/* ASCII Art */
+.ascii-art {
+    font-family: monospace;
+    font-size: 10px;
+    color: #00ff00;
+    white-space: pre; /* Mantém a formatação do desenho */
+    margin-bottom: 20px;
+    border: 1px solid #00ff00;
+    padding: 10px;
+    background: #001100;
+}
+
+.stats-list {
+    list-style: none;
+    text-align: left;
+}
+
+.stats-list li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+/* Coluna da Direita (Bio) */
+.bio-content {
+    flex: 2;
+    min-width: 300px;
+}
+
+.section-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #00ff00;
+    display: inline-block;
+}
+
+/* Barras de Habilidade (Health Bars) */
+.skill-group {
+    margin-bottom: 15px;
+}
+
+.skill-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    border: 2px solid #00ff00;
+    padding: 2px;
+    background-color: #000;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #00ff00;
+    /* Animação de carregamento */
+    animation: loadBar 1.5s ease-out forwards;
+    width: 0; /* Começa em 0 para animar */
+}
+
+@keyframes loadBar {
+    from { width: 0; }
+    /* O valor final é definido no inline style do HTML */
+}
+
+/* Lista Retro */
+.retro-list {
+    list-style: none;
+    margin-left: 10px;
+}
+
+.retro-list li {
+    margin-bottom: 5px;
+}
+
+/* Ajuste Responsivo para o Sobre */
+@media (max-width: 600px) {
+    .profile-card {
+        border-right: none;
+        border-bottom: 1px dashed #004400;
+        padding-bottom: 20px;
+        padding-right: 0;
+    }
+}
+/* --- ESTILOS DA PÁGINA CONTATO --- */
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Estilo do Formulário */
+.retro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Inputs com visual de Terminal */
+.retro-form input,
+.retro-form textarea {
+    background-color: #000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    font-family: 'VT323', monospace;
+    font-size: 1.1rem;
+    padding: 10px;
+    outline: none; /* Remove a borda azul padrão do browser */
+    box-shadow: inset 0 0 5px #003300; /* Sombra interna para profundidade */
+}
+
+.retro-form input:focus,
+.retro-form textarea:focus {
+    background-color: #001100;
+    box-shadow: 0 0 5px #00ff00; /* Brilho externo ao focar */
+}
+
+/* Botão de Enviar */
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    font-family: 'VT323', monospace;
+    cursor: pointer;
+    font-weight: bold;
+    color: #00ff00;
+}
+
+/* Área de Links Diretos */
+.direct-links h3 {
+    border-bottom: 1px dashed #00ff00;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.link-list {
+    list-style: none;
+}
+
+.link-list li {
+    margin-bottom: 10px;
+}
+
+.link-list a {
+    border: 1px solid transparent; /* Para evitar pulo no hover */
+}
+
+.link-list a:hover {
+    border: 1px dashed #00ff00;
+    background-color: #001100;
+    color: #00ff00; /* Mantém verde no hover, diferente do padrão */
+    text-decoration: none;
+}
+
+/* Mensagem do Sistema */
+.system-msg {
+    margin-top: 30px;
+    border: 1px dotted #00ff00;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Responsividade do Contato */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* Vira uma coluna só no celular */
+    }
+}
+/* --- ESTILOS DO GAME --- */
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.game-header {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px dashed #004400;
+    padding-bottom: 10px;
+}
+
+#gameCanvas {
+    background-color: #000500;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 15px #00ff0033;
+    image-rendering: pixelated; /* Mantém pixels nítidos */
+    max-width: 100%; /* Responsivo: ajusta se a tela for menor que 800px */
+    height: auto;
+    display: block;
+    margin-bottom: 15px;
+}
+
+#startBtn {
+    padding: 10px 30px;
+    font-size: 1.5rem;
+    cursor: pointer;
 }

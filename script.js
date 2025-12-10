@@ -1,3 +1,6 @@
+/* =========================================
+   1. RELÓGIO (Funciona em todas as páginas)
+   ========================================= */
 function atualizarRelogio() {
     const agora = new Date();
     const horas = String(agora.getHours()).padStart(2, "0");
@@ -77,31 +80,4 @@ function imprimirResultado(texto, cor = "#ccffcc") {
     resposta.style.color = cor;
     resposta.innerHTML = `>> ${texto}`;
     terminalOutput.appendChild(resposta);
-}
-
-/* =========================================
-   3. FORMULÁRIO (Apenas no Contato)
-   ========================================= */
-const formularioContato = document.querySelector(".retro-form");
-
-// O "if" abaixo impede o erro na Home ou outras páginas
-if (formularioContato) {
-    formularioContato.addEventListener("submit", function (e) {
-        e.preventDefault(); // Impede o reload real da página
-        const btn = document.querySelector(".btn-submit");
-
-        // Feedback visual de envio
-        const textoOriginal = btn.innerHTML;
-        btn.innerHTML = ">> ENVIADO COM SUCESSO <<";
-        btn.style.backgroundColor = "#00ff00";
-        btn.style.color = "#000";
-
-        // Reseta após 3 segundos
-        setTimeout(() => {
-            formularioContato.reset();
-            btn.innerHTML = textoOriginal;
-            btn.style.backgroundColor = "transparent";
-            btn.style.color = "#00ff00";
-        }, 3000);
-    });
 }

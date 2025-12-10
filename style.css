@@ -502,3 +502,55 @@ footer {
         display: none;
     }
 }
+/* --- ESTILO TECH CHIPS (CLEAN) --- */
+
+.skills-container {
+    margin-top: 15px;
+}
+
+.skill-category {
+    margin-bottom: 20px;
+}
+
+.cat-title {
+    color: #00aa00;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted #004400;
+    display: inline-block;
+}
+
+.tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tech-chip {
+    border: 1px solid #004400;
+    background-color: #000900;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    cursor: default;
+    transition: all 0.2s;
+    position: relative;
+    
+    /* Cantos cortados (clip-path) para visual Cyberpunk sutil */
+    clip-path: polygon(
+        0 0, 
+        100% 0, 
+        100% 70%, 
+        90% 100%, 
+        0 100%
+    );
+}
+
+/* Efeito Hover: O chip "acende" apenas ao passar o mouse */
+.tech-chip:hover {
+    background-color: #00ff00;
+    color: #000;
+    border-color: #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    font-weight: bold;
+    cursor: help; /* Muda o cursor para indicar que é informativo */
+}

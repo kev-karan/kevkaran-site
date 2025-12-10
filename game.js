@@ -4,13 +4,11 @@ const scoreElement = document.getElementById("scoreVal");
 const livesElement = document.getElementById("livesVal"); // Elemento das vidas
 const startBtn = document.getElementById("startBtn");
 
-// Configurações do Jogo
 let gameRunning = false;
 let score = 0;
-let lives = 3; // Começa com 3 vidas
+let lives = 3;
 let animationId;
 
-// Jogador
 const player = {
     x: canvas.width / 2,
     y: canvas.height - 30,
@@ -20,11 +18,9 @@ const player = {
     dx: 0,
 };
 
-// Listas de objetos
 let bullets = [];
 let enemies = [];
 
-// Controles
 document.addEventListener("keydown", (e) => {
     if (!gameRunning) return;
     if (e.key === "ArrowRight" || e.key === "d") player.dx = player.speed;
@@ -54,7 +50,6 @@ function criarInimigo() {
     if (!gameRunning) return;
     const size = Math.random() * 20 + 20;
 
-    // Aumenta a dificuldade baseado no score (velocidade aumenta levemente)
     const dificuldade = 1 + score / 500;
 
     enemies.push({
@@ -62,10 +57,9 @@ function criarInimigo() {
         y: -size,
         w: size,
         h: size,
-        speed: (Math.random() * 2 + 1) * dificuldade, // Aplica dificuldade
+        speed: (Math.random() * 2 + 1) * dificuldade,
     });
 
-    // Cria próximo inimigo (tempo diminui conforme score aumenta)
     let tempoSpawn = Math.random() * 1000 + 500;
     if (score > 100) tempoSpawn -= 100;
     if (score > 300) tempoSpawn -= 100;
@@ -96,25 +90,21 @@ function desenharEnemies() {
     ctx.strokeStyle = "#ff0000";
     ctx.lineWidth = 2;
 
-    // Usamos um loop reverso para poder remover itens sem bugar o loop
     for (let i = enemies.length - 1; i >= 0; i--) {
         let e = enemies[i];
         e.y += e.speed;
         ctx.strokeRect(e.x, e.y, e.w, e.h);
 
-        // 1. Inimigo passou do fundo (Invasão)
         if (e.y > canvas.height) {
-            enemies.splice(i, 1); // Remove o inimigo
+            enemies.splice(i, 1);
             perderVida();
-        }
-        // 2. Inimigo tocou no player (Colisão)
-        else if (
+        } else if (
             player.x < e.x + e.w &&
             player.x + player.w > e.x &&
             player.y < e.y + e.h &&
             player.y + player.h > e.y
         ) {
-            enemies.splice(i, 1); // Remove o inimigo
+            enemies.splice(i, 1);
             perderVida();
         }
     }
@@ -133,12 +123,10 @@ function checarColisoes() {
     });
 }
 
-// Nova função para gerenciar as vidas
 function perderVida() {
     lives--;
     livesElement.innerText = lives;
 
-    // Efeito visual de dano (tela pisca vermelho rapidinho)
     canvas.style.borderColor = "red";
     setTimeout(() => (canvas.style.borderColor = "#00ff00"), 200);
 
@@ -169,12 +157,12 @@ function iniciarJogo() {
 
     gameRunning = true;
     score = 0;
-    lives = 3; // Reseta vidas
+    lives = 3;
     bullets = [];
     enemies = [];
 
     scoreElement.innerText = score;
-    livesElement.innerText = lives; // Atualiza texto
+    livesElement.innerText = lives;
     startBtn.style.display = "none";
     player.x = canvas.width / 2;
 

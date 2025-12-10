@@ -1,6 +1,3 @@
-/* =========================================
-   1. RELÓGIO (Funciona em todas as páginas)
-   ========================================= */
 function atualizarRelogio() {
     const agora = new Date();
     const horas = String(agora.getHours()).padStart(2, "0");
@@ -16,30 +13,24 @@ function atualizarRelogio() {
 setInterval(atualizarRelogio, 1000);
 atualizarRelogio();
 
-/* =========================================
-   2. TERMINAL INTERATIVO (Apenas na Home)
-   ========================================= */
 const cmdInput = document.getElementById("cmdInput");
 const terminalOutput = document.getElementById("terminalOutput");
 
-// O "if" abaixo impede o erro na página de Contato ou Projetos
 if (cmdInput && terminalOutput) {
     cmdInput.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
             const comando = this.value.toLowerCase().trim();
             processarComando(comando);
-            this.value = ""; // Limpa o input
+            this.value = "";
         }
     });
 }
 
 function processarComando(cmd) {
-    // Cria linha do histórico
     const novaLinha = document.createElement("p");
     novaLinha.innerHTML = `<span style="color:#00ff00">visitor@kelwin:~$</span> ${cmd}`;
     terminalOutput.appendChild(novaLinha);
 
-    // Comandos
     switch (cmd) {
         case "ajuda":
         case "help":
